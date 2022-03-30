@@ -4,7 +4,7 @@ import CategoryTitle from '../CategotyTitle/CategoryTitle';
 import ContentRow from '../ContentRow/ContentRow';
 import * as palette from '../../../Colors';
 
-const Container = styled.div`
+const Container = styled.section`
 	margin-bottom: 32px;
 	display: flex;
 	flex-direction: column;

@@ -1,30 +1,43 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import TabName from './TabName/TabName';
 import * as palette from '../../../Colors';
+import { NavLink } from 'react-router-dom';
+
+const Container = styled.div`
+	gap: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin-bottom: 32px;
+	font-size: 28px;
+	font-weight: 500;
+`;
 
 const CategoryTabs = () => {
 
-	const [isActive, setIsActive] = useState(false);
-
-	const Container = styled.div`
-		gap: 24px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-wrap: wrap;
-		margin-bottom: 32px;
-	`;	
+	type ActiveStatus = { isActive: boolean }
+	const linkStyle = (linkProps: ActiveStatus) => ({
+		paddingBottom: '8px',
+		color: linkProps.isActive ? palette.red : palette.gray1,
+		borderBottom: linkProps.isActive ? `2px solid ${palette.red}` : 'none'
+	});
 
 	return (
 		<Container>
-			<TabName>
+			<NavLink
+				to='/films'
+				style={linkStyle}
+			>
 				Фильмы
-			</TabName>
-			<TabName>
+			</NavLink>
+			<NavLink
+				to='/channels'
+				style={linkStyle}
+			>
 				Телеканалы
-			</TabName>
-		</Container>
+			</NavLink>
+		</Container >
 	);
 };
 

@@ -3,38 +3,52 @@ import styled from 'styled-components';
 import MovieItem from '../MovieItem/MovieItem';
 import CategoryTitle from '../CategotyTitle/CategoryTitle';
 import ContentRow from '../ContentRow/ContentRow';
+import { useFetchMovies } from './fetchMovies';
 import * as palette from '../../../Colors';
+import { FilmItem } from './fetchMovies';
 
-const NewMovies = () => {
-
-	const Container = styled.div`
+const Container = styled.section`
 		margin-bottom: 32px;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
 	`;
-	// const MoviesRow = styled.div`
-	// 	row-gap: 50px;
-	// 	display: flex;
-	// 	justify-content: space-between;
-	// 	flex-wrap: wrap;
-	// `;
 
-	const films = ['Мульт в кино. Выпуск №103. Некогда грустить!', 'Новый Бэтмен', 'Однажды... в Голливуде', 'Стриптизёрши'];
+
+type DisplayType = {
+	movies: FilmItem[] | null
+}
+const Skeleton = styled.div<DisplayType>`
+	width: 1200px;
+	height: 434px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 27px;
+	display: ${({ movies }) => movies ? 'none' : 'flex'};
+	background: ${palette.gray6};
+`;
+
+const NewMovies = () => {
+
+	const { movies } = useFetchMovies();
+
 
 	return (
 		<Container>
 			<CategoryTitle>
 				🔥 Новинки
 			</CategoryTitle>
+			<Skeleton movies={movies}>
+				<span>Loading...</span>
+			</Skeleton>
 			<ContentRow>
 				<>
-					{films.map(item =>
+					{movies?.map(movie =>
 						<MovieItem
-							title={item}
-							imageUrl={''}
-							text={item}
-							key={item}
+							title={movie.name}
+							imageUrl={movie.img}
+							text={movie.description}
+							key={movie.name}
 						/>
 					)}
 				</>

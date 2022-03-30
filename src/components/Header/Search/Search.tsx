@@ -1,32 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 import * as palette from '../../../Colors';
+import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
 
+const Container = styled.div`
+	width: 402px;
+	gap: 32px;
+	height: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
+
 const Search = () => {
-
-	const Container = styled.div`
-		gap: 32px;
-		height: 25px;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	`;
-
-	const SearchButton = styled.button`
-		color: ${palette.red};
-		font-weight: 500;
-		font-size: 16px;
-		line-height: 19px;
-
-	`;
-
 	return (
 		<Container>
 			<Input placeholder='Поиск...'></Input>
-			<SearchButton>
+			<Button variant='text' width='50px'>
 				Найти
-			</SearchButton>
+			</Button>
 		</Container>
 
 	);

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import NewMovies from './NewMovies/NewMovies';
 import Genres from './Genres/Genres';
 
-const Main = () => {
+const Films = () => {
 
 	const Container = styled.div`
 		gap: 20px;
@@ -24,4 +24,4 @@ const Main = () => {
 	);
 };
 
-export default Main;
+export default Films;
