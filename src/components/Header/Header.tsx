@@ -7,6 +7,8 @@ import VideoServiceLogo from '../Logos/VideoService/VideoServiceLogo';
 import Category from './CategoryTabs/CategoryTabs';
 import Modal from '../Modal/Modal';
 import AuthModalContent from '../Modal/Auth/AuthModalContent';
+import User from '../../store/User';
+import { observer } from 'mobx-react-lite';
 import { getFirstLetterWithDot } from '../../helpers/getFirstLetterWithDot';
 
 
@@ -46,30 +48,7 @@ const Login = styled.div`
 		grid-area: 2 / 1 / 3 / 2;
 	};
 `;
-// const Container = styled.header`
-// 	width: 100%;
-// 	column-gap: 20px;
-// 	row-gap: 35px;
-// 	padding-bottom: 4px;
-// 	margin: 32px 0px 44px;
-// 	display: flex;
-// 	align-items: center;
-// 	justify-content: space-between;
-// 	flex-wrap: wrap;
-// 	@media (max-width: 992px){
-// 		flex-direction: column;
-// 	};
-// `;
-// const Login = styled.div`
-// 	gap: 16px;
-// 	min-width: 220px;
-// 	display: flex;
-// 	align-items: center;
-// 	justify-content: end;
-// 	@media (max-width: 992px){
-// 		order: -1;
-// 	};
-// `;
+
 const Name = styled.p`
 	white-space: nowrap;
 `;
@@ -79,7 +58,7 @@ type User = {
 	lastName: string,
 } | null
 
-const Header = () => {
+const Header = observer(() => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isAuthorized, setIsAuthorized] = useState(false);
 	const [userInfo, setUserInfo] = useState<User>({
@@ -96,9 +75,11 @@ const Header = () => {
 	const clickHandler = (e: React.MouseEvent) => {
 		e.preventDefault();
 
-		!isAuthorized
-			? setIsModalOpen(true)
-			: logout();
+		if (User.currentUser) User.logout();
+		else {
+			setIsModalOpen(true);
+			// User.statusMessage = '';
+		}
 	};
 
 	const closeModal = (e: React.MouseEvent) => {
@@ -108,6 +89,7 @@ const Header = () => {
 
 
 	useEffect(() => {
+		console.log(User);
 		const credentials = localStorage.getItem('credentials');
 		if (credentials) {
 			const parsed = JSON.parse(credentials || '');
@@ -122,8 +104,8 @@ const Header = () => {
 	}, [isModalOpen]);
 
 
-	const loginButtonText = isAuthorized ? 'Выйти' : 'Войти';
-	const buttonVariant = isAuthorized ? 'text' : 'contained';
+	const loginButtonText = User.currentUser ? 'Выйти' : 'Войти';
+	const buttonVariant = User.currentUser ? 'text' : 'contained';
 
 	// const firstNameLastName = userInfo &&
 	// 	`${userInfo.firstName} ${getFirstLetterWithDot(userInfo.lastName)}`;
@@ -134,9 +116,9 @@ const Header = () => {
 			<Search />
 
 			<Login>
-				{userInfo &&
+				{User.currentUser &&
 					<Name>
-						{userInfo.firstName} {userInfo.lastName}
+						{User.currentUser.firstName} {User.currentUser.lastName}
 					</Name>
 				}
 				<Button
@@ -152,8 +134,10 @@ const Header = () => {
 			}
 		</Container>
 	);
-};
+});
 
 //refactor need footer whole width
 
 export default Header;
+
+

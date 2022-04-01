@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Layout from '../Layout';
 import ChannelsRoute from './Channels';
 import FilmsRoute from './Films';
@@ -13,6 +13,14 @@ const RoutesAll = () => {
 				<Route path='/' element={<Layout />}>
 					<Route path='films' element={<FilmsRoute />} />
 					<Route path='channels' element={<ChannelsRoute />} />
+					<Route
+						path="*"
+						element={<Navigate to="films" replace />}
+					/>
+					<Route
+						path="/"
+						element={<Navigate to="films" replace />}
+					/>
 				</Route>
 			</Routes>
 		</BrowserRouter>

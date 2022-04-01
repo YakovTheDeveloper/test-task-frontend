@@ -4,6 +4,8 @@ import * as palette from '../../../Colors';
 import Input from '../../common/Input/Input';
 import Button from '../../common/Button/Button';
 import { useAuth } from '../../../hooks/auth/useAuth';
+import { observer } from 'mobx-react-lite';
+import User from '../../../store/User';
 
 const Title = styled.h3`
 	text-align: center;
@@ -12,12 +14,14 @@ const Title = styled.h3`
 	line-height: 33px;
 `;
 
-const AuthModalContent = () => {
+const AuthMessage = styled.p`
+
+`;
+
+const AuthModalContent = observer(() => {
 
 	const [login, setLogin] = useState('');
 	const [password, setPassword] = useState('');
-
-	const { message, setMessage, validateUser } = useAuth();
 
 	const onLoginChange = (e: React.ChangeEvent<Element>) => {
 		const target = e.target as HTMLTextAreaElement;
@@ -28,14 +32,20 @@ const AuthModalContent = () => {
 		setPassword(target.value);
 	};
 
-	const clickHandler = (e: React.MouseEvent) => {
+	const loginHandler = (e: React.MouseEvent) => {
 		if (login === '' || password === '') {
-			setMessage('Заполните поле ввода');
+			User.statusMessage = 'Заполните поле ввода';
 			return;
 		}
-		validateUser(login, password);
+		User.login(login, password);
+		// validateUser(login, password);
 		e.preventDefault();
 	};
+
+	useEffect(() => {
+		User.statusMessage = '';
+	}, []);
+
 
 
 	return (
@@ -57,15 +67,15 @@ const AuthModalContent = () => {
 
 			<Button
 				variant='contained'
-				onClick={clickHandler}
+				onClick={loginHandler}
 			>Войти
 			</Button>
 
-			<div>
-				{message}
-			</div>
+			<AuthMessage>
+				{User.statusMessage}
+			</AuthMessage>
 		</>
 	);
-};
+});
 
 export default AuthModalContent;

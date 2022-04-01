@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 import Layout from '../Layout';
-import Main from '../components/Main/Films';
+import Films from '../components/Films/Films';
 
 
 
 const FilmsRoute = () => {
 	return (
-		<Main />
+		<Films />
 	);
 };
 
