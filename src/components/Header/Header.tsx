@@ -10,24 +10,66 @@ import AuthModalContent from '../Modal/Auth/AuthModalContent';
 import { getFirstLetterWithDot } from '../../helpers/getFirstLetterWithDot';
 
 
-const Container = styled.div`
+const Container = styled.header`
 	width: 100%;
-	column-gap: 20px;
-	row-gap: 35px;
+	/* column-gap: 20px;
+	row-gap: 35px; */
 	padding-bottom: 4px;
 	margin: 32px 0px 44px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-wrap: wrap;
+
+	display: grid; 
+	grid-template-columns: 1fr 1fr 1fr; 
+	grid-template-rows: 1fr; 
+
+	@media (max-width: 992px){
+		gap: 15px 0px;
+		grid-template-columns: 1fr 1fr; 
+		grid-template-rows: 1fr 1fr; 
+		/* flex-direction: column; */
+	};
+	@media (max-width: 440px){
+			grid-auto-flow: column;
+			gap: 15px 0px;
+			grid-template-columns: 1fr; 
+			grid-template-rows: 1fr 1fr 1fr; 
+
+			/* align-items: center; */
+	};
 `;
 const Login = styled.div`
-	gap: 16px;
-	min-width: 220px;
 	display: flex;
-	align-items: center;
 	justify-content: end;
+	align-items: center;
+	gap: 16px;
+	/* min-width: 220px; */
+	@media (max-width: 440px){
+		grid-area: 2 / 1 / 3 / 2;
+	};
 `;
+// const Container = styled.header`
+// 	width: 100%;
+// 	column-gap: 20px;
+// 	row-gap: 35px;
+// 	padding-bottom: 4px;
+// 	margin: 32px 0px 44px;
+// 	display: flex;
+// 	align-items: center;
+// 	justify-content: space-between;
+// 	flex-wrap: wrap;
+// 	@media (max-width: 992px){
+// 		flex-direction: column;
+// 	};
+// `;
+// const Login = styled.div`
+// 	gap: 16px;
+// 	min-width: 220px;
+// 	display: flex;
+// 	align-items: center;
+// 	justify-content: end;
+// 	@media (max-width: 992px){
+// 		order: -1;
+// 	};
+// `;
 const Name = styled.p`
 	white-space: nowrap;
 `;

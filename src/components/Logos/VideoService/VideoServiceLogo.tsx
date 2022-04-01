@@ -10,6 +10,10 @@ const VideoServiceLogo = () => {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		
+		@media (max-width: 440px){
+			justify-self: center;
+	};
 	`;
 
 	const LogoText = styled.p`

@@ -7,8 +7,13 @@ import * as palette from '../../../Colors';
 
 
 const StyledFlex = styled(Flex)`
+	
+	row-gap: 20px;
 	background: ${palette.gray6};
 	border-radius: 8px;
+	@media (max-width: 992px){
+			flex-direction: column;
+	};
 `;
 const LogoContainer = styled.div`
 	width: 400px;
@@ -23,13 +28,6 @@ const Title = styled.h4`
 	margin-bottom: 17px;
 `;
 
-const ProgramItem = styled.li`
-	display: flex;
-	&:first-child{
-		color: red;
-	}
-`;
-
 export type ProgramItemType = {
 	time: string
 	name: string
@@ -41,7 +39,10 @@ type Props = {
 }
 const ChannelItem: FC<Props> = ({ logoUrl, title, programList }) => {
 	return (
-		<StyledFlex align='center' padding='21px 0px 19px' wrap='wrap'>
+		<StyledFlex
+			align='center'
+			padding='21px 0px 19px'
+			wrap='wrap'>
 			<LogoContainer>
 				<img src={logoUrl} alt="channel picture" />
 			</LogoContainer>

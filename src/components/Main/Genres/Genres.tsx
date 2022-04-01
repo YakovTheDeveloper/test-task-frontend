@@ -9,6 +9,9 @@ const Container = styled.section`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	@media (max-width: 992px){
+			align-items: center;
+	};
 `;
 
 type GenreBoxType = {

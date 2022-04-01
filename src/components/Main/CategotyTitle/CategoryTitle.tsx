@@ -8,12 +8,17 @@ type Props = {
 
 const CategoryTitle: FC<Props> = ({ children }) => {
 
-	const Text = styled.a`
+	const Text = styled.h3`
+		width:100%;
 		margin-bottom: 16px;
 		font-weight: 500;
 		font-size: 28px;
 		line-height: 33px;
 		color: ${palette.gray1};
+		@media (max-width: 992px){
+			text-align: center;
+			margin-bottom: 24px;
+		};
 	`;
 
 	return (

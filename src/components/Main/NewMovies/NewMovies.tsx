@@ -8,9 +8,16 @@ import * as palette from '../../../Colors';
 import { FilmItem } from './fetchMovies';
 
 const Container = styled.section`
+		width: 100%;
 		margin-bottom: 32px;
 		display: flex;
 		flex-direction: column;
+		@media (max-width: 992px){
+			align-items: center;
+			flex-direction: column;
+			flex-wrap: nowrap;
+			justify-content: center;
+		};
 	`;
 
 
@@ -18,7 +25,7 @@ type DisplayType = {
 	movies: FilmItem[] | null
 }
 const Skeleton = styled.div<DisplayType>`
-	width: 1200px;
+	/* width: 1200px; */
 	height: 434px;
 	display: flex;
 	align-items: center;
@@ -26,6 +33,12 @@ const Skeleton = styled.div<DisplayType>`
 	font-size: 27px;
 	display: ${({ movies }) => movies ? 'none' : 'flex'};
 	background: ${palette.gray6};
+	@media (max-width: 992px){
+			align-items: center;
+			flex-direction: column;
+			flex-wrap: nowrap;
+			justify-content: center;
+		};
 `;
 
 const NewMovies = () => {

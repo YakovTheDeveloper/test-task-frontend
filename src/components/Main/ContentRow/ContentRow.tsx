@@ -6,6 +6,9 @@ const Row = styled.div`
 	row-gap: 50px;
 	display: flex;
 	flex-wrap: wrap;
+	@media (max-width: 992px){
+			justify-content: center;
+	};
 	`;
 
 type Props = {
