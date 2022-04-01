@@ -6,9 +6,7 @@ import Channels from '../components/Channels/Channels';
 
 const ChannelsRoute = () => {
 	return (
-		<Layout>
-			<Channels />
-		</Layout>
+		<Channels />
 	);
 };
 

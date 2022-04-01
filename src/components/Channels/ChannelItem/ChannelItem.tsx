@@ -2,17 +2,19 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import Flex from '../../common/Flex/Flex';
 import Text from '../../common/Text/Text';
+import Program from './Program/Program';
 import * as palette from '../../../Colors';
 
+
+const StyledFlex = styled(Flex)`
+	background: ${palette.gray6};
+	border-radius: 8px;
+`;
 const LogoContainer = styled.div`
 	width: 400px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-`;
-
-const Time = styled.p`
-	margin-right: 16px;
 `;
 
 const Title = styled.h4`
@@ -21,43 +23,33 @@ const Title = styled.h4`
 	margin-bottom: 17px;
 `;
 
-const Program = styled.ul`
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-`;
-
 const ProgramItem = styled.li`
 	display: flex;
+	&:first-child{
+		color: red;
+	}
 `;
 
-type ProgramItem = {
+export type ProgramItemType = {
 	time: string
 	name: string
 }
 type Props = {
 	logoUrl: string
 	title: string
-	programList: ProgramItem[]
+	programList: ProgramItemType[]
 }
 const ChannelItem: FC<Props> = ({ logoUrl, title, programList }) => {
 	return (
-		<Flex align='center' padding='21px 0px 19px' wrap='wrap'>
+		<StyledFlex align='center' padding='21px 0px 19px' wrap='wrap'>
 			<LogoContainer>
 				<img src={logoUrl} alt="channel picture" />
 			</LogoContainer>
 			<Flex align='start' direction='column'>
 				<Title>{title}</Title>
-				<Program>
-					{programList.map(program =>
-						<ProgramItem key={program.name}>
-							<Time>{program.time}</Time>
-							<Text>{program.name}</Text>
-						</ProgramItem>
-					)}
-				</Program>
+				<Program programList={programList} />
 			</Flex>
-		</Flex>
+		</StyledFlex>
 	);
 };
 

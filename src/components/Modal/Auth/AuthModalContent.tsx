@@ -5,11 +5,6 @@ import Input from '../../common/Input/Input';
 import Button from '../../common/Button/Button';
 import { useAuth } from '../../../hooks/auth/useAuth';
 
-type Props = {
-	children?: React.ReactChild
-	isOpen?: () => void
-	closeModal?: (e: React.MouseEvent) => void
-}
 const Title = styled.h3`
 	text-align: center;
 	font-weight: 500;
@@ -17,8 +12,7 @@ const Title = styled.h3`
 	line-height: 33px;
 `;
 
-
-const AuthModal: FC<Props> = ({ children, isOpen, closeModal }) => {
+const AuthModalContent = () => {
 
 	const [login, setLogin] = useState('');
 	const [password, setPassword] = useState('');
@@ -74,4 +68,4 @@ const AuthModal: FC<Props> = ({ children, isOpen, closeModal }) => {
 	);
 };
 
-export default AuthModal;
+export default AuthModalContent;

@@ -38,9 +38,6 @@ type User = {
 } | null
 
 const Header = () => {
-
-
-
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isAuthorized, setIsAuthorized] = useState(false);
 	const [userInfo, setUserInfo] = useState<User>({
