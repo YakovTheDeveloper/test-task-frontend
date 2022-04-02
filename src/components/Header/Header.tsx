@@ -4,12 +4,14 @@ import Search from './Search/Search';
 import LoginButton from '../common/Button/LoginButton/LoginButton';
 import Button from '../common/Button/Button';
 import VideoServiceLogo from '../Logos/VideoService/VideoServiceLogo';
-import Category from './CategoryTabs/CategoryTabs';
+import Category from '../CategoryTabs/CategoryTabs';
 import Modal from '../Modal/Modal';
 import AuthModalContent from '../Modal/Auth/AuthModalContent';
 import User from '../../store/User';
 import { observer } from 'mobx-react-lite';
-import { getFirstLetterWithDot } from '../../helpers/getFirstLetterWithDot';
+import Login from './Login/Login';
+import ChangeNameForm from './ChangeNameForm/ChangeNameForm';
+import { getFirstLetterAndAppendDot } from '../../helpers/getFirstLetterAndAppendDot';
 
 
 const Container = styled.header`
@@ -38,7 +40,7 @@ const Container = styled.header`
 			/* align-items: center; */
 	};
 `;
-const Login = styled.div`
+const Logins = styled.div`
 	display: flex;
 	justify-content: end;
 	align-items: center;
@@ -49,8 +51,13 @@ const Login = styled.div`
 	};
 `;
 
+
+
 const Name = styled.p`
 	white-space: nowrap;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 type User = {
@@ -66,11 +73,7 @@ const Header = observer(() => {
 		lastName: '',
 	});
 
-	const logout = () => {
-		localStorage.removeItem('credentials');
-		setIsAuthorized(false);
-		setUserInfo(null);
-	};
+
 
 	const clickHandler = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -88,50 +91,35 @@ const Header = observer(() => {
 
 
 
-	useEffect(() => {
-		console.log(User);
-		const credentials = localStorage.getItem('credentials');
-		if (credentials) {
-			const parsed = JSON.parse(credentials || '');
 
-			setIsAuthorized(true);
-			setUserInfo({
-				firstName: parsed.firstName,
-				lastName: getFirstLetterWithDot(parsed.lastName),
-			});
-		}
-		// else setUserInfo(null)
-	}, [isModalOpen]);
+	// useEffect(() => {
+	// 	console.log(User);
+	// 	const credentials = localStorage.getItem('credentials');
+	// 	if (credentials) {
+	// 		const parsed = JSON.parse(credentials || '');
+
+	// 		setIsAuthorized(true);
+	// 		setUserInfo({
+	// 			firstName: parsed.firstName,
+	// 			lastName: getFirstLetterAndAppendDot(parsed.lastName),
+	// 		});
+	// 	}
+	// }, [isModalOpen]);
 
 
 	const loginButtonText = User.currentUser ? 'Выйти' : 'Войти';
 	const buttonVariant = User.currentUser ? 'text' : 'contained';
 
 	// const firstNameLastName = userInfo &&
-	// 	`${userInfo.firstName} ${getFirstLetterWithDot(userInfo.lastName)}`;
+	// 	`${userInfo.firstName} ${getFirstLetterAndAppendDot(userInfo.lastName)}`;
 
 	return (
 		<Container>
 			<VideoServiceLogo />
 			<Search />
 
-			<Login>
-				{User.currentUser &&
-					<Name>
-						{User.currentUser.firstName} {User.currentUser.lastName}
-					</Name>
-				}
-				<Button
-					variant={buttonVariant}
-					onClick={clickHandler}
-				>{loginButtonText}</Button>
-			</Login>
+			<Login />
 
-			{isModalOpen &&
-				<Modal closeModal={closeModal}>
-					<AuthModalContent />
-				</Modal>
-			}
 		</Container>
 	);
 });

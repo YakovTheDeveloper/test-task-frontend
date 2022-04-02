@@ -1,4 +1,5 @@
 import { DatabaseUser } from '../models/user';
+import { fetchUser } from './fetchUser';
 import { userToFindOrNull, isPasswordCorrect } from './findUser';
 
 type StatusMessage = 'Пользователь не найден' | 'Неверный пароль' | 'Успешно'
@@ -8,9 +9,9 @@ type ValidationResult = {
 	user: DatabaseUser | null 
 }
 
-export const validateLoginDataAndGetUser = (username: string, password: string): ValidationResult => {
+export const validateLoginDataAndGetUser = async (username: string, password: string): Promise<ValidationResult> => {
 
-	const user = userToFindOrNull(username);
+	const user = await fetchUser(username);
 	if (!user) return {
 		success: false,
 		message: 'Пользователь не найден',

@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "123433",
+      "password": "123",
+      "firstName": "Константин",
+      "lastName": "Константинов"
+    },
+    {
+      "id": 2,
+      "username": "123",
+      "password": "123",
+      "firstName": "Яков",
+      "lastName": "Горяинов"
+    }
+  ],
+  "films": {
+    "2": 2
+  }
+}

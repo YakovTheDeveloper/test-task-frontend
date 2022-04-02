@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import * as palette from '../../../Colors';
+import * as palette from '../../Colors';
 import { NavLink } from 'react-router-dom';
 
 const Container = styled.div`

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Footer from './components/Footer/Footer';
-import CategoryTabs from './components/Header/CategoryTabs/CategoryTabs';
+import CategoryTabs from './components/CategoryTabs/CategoryTabs';
 import Header from './components/Header/Header';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';

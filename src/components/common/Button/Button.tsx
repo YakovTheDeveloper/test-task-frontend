@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ButtonHTMLAttributes, FC } from 'react';
 import styled from 'styled-components';
 import * as palette from '../../../Colors';
 
@@ -21,11 +21,19 @@ type PossibleButtonTypes = 'text' | 'contained'
 type Props = {
 	variant: PossibleButtonTypes
 	children?: React.ReactChild
+	type?: 'button' | 'submit'
 	onClick?: (e?: any) => void
 	width?: string
+	alignSelf?: React.CSSProperties['alignSelf']
+	justifySelf?: React.CSSProperties['justifySelf']
 }
 
 const StyledButton = styled.button<Props>`
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	align-self:${({ alignSelf }) => alignSelf || 'auto '};
+	justify-self:${({ justifySelf }) => justifySelf || 'auto '};
 	width:${({ width }) => width || 'fit-content'};
 	font-size: 16px;
   	font-weight: 500;
@@ -36,14 +44,13 @@ const StyledButton = styled.button<Props>`
 	}}			
 `;
 
-const Button: FC<Props> = ({ variant, children, onClick }) => {
+const Button: FC<Props> = (props) => {
 	return (
 		<StyledButton
-			variant={variant}
-			onClick={onClick}
-			type='button'
+			type={props.type ? props.type : 'button'}
+			{...props}
 		>
-			{children}
+			{props.children}
 		</StyledButton>
 	);
 };

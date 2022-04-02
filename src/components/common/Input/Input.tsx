@@ -1,12 +1,16 @@
-import React, { FC } from 'react';
+import React, { FC, HTMLInputTypeAttribute } from 'react';
 import * as palette from '../../../Colors';
 import styled from 'styled-components';
+
 
 type Props = {
 	width?: string
 	placeholder?: string
 	onChange?: (e: React.ChangeEvent) => void
 	value?: string
+	id?: string
+	onBlur?: () =>  void
+	type?: HTMLInputTypeAttribute
 }
 
 const StyledInput = styled.input<Props>`
@@ -33,13 +37,10 @@ const StyledInput = styled.input<Props>`
   }
 `;
 
-const Input: FC<Props> = ({ width, placeholder, onChange, value }) => {
+const Input: FC<Props> = (props) => {
 	return (
 		<StyledInput
-			width={width}
-			placeholder={placeholder}
-			onChange={onChange}
-			value={value}
+			{...props}
 		/>
 	);
 };
