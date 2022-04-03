@@ -10,11 +10,6 @@ const Text: FC<Props> = ({ children }) => {
 		font-weight: 400;
 		color: ${palette.gray1}
 	`;
-
-	const LightText = styled(TextContent)`
-		color: ${palette.gray6}
-	`;
-
 	return (
 		<>
 			<TextContent>

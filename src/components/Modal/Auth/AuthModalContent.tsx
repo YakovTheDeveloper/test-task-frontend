@@ -1,87 +1,53 @@
 import React, { FC, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import * as palette from '../../../Colors';
 import Input from '../../common/Input/Input';
 import Button from '../../common/Button/Button';
-import { useAuth } from '../../../hooks/auth/useAuth';
 import { observer } from 'mobx-react-lite';
 import User from '../../../store/User';
 import Checkbox from '../../common/Checkbox/Checkbox';
 import Flex from '../../common/Flex/Flex';
-
-const Form = styled.form`
-	width: 304px;
-	height: 394px;
-	/* gap: 24px; */
-	padding: 36px;
-	border-radius: 8px;
-	background: ${palette.white};
-
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
-	position: relative;
-`;
-const Title = styled.h3`
-	text-align: center;
-	font-weight: 500;
-	font-size: 28px;
-	line-height: 33px;
-`;
-const Remember = styled(Flex)`
-	align-self: start;
-`;
-
-const LoginButton = styled(Button)`
-`;
-
-
-const AuthMessage = styled.p`
-`;
-const LoginInput = styled(Input)``;
-const PasswordInput = styled(Input)``;
+import { useLoginData } from './useLoginData';
+import { Styled } from './AuthModalContent.styles';
 
 type Props = {
-	closeModal?: () => void
+	closeModal: () => void
 }
-
 const AuthModalContent: FC<Props> = observer(({ closeModal }) => {
+	const {
+		AuthMessage,
+		Form,
+		LoginButton,
+		LoginInput,
+		PasswordInput,
+		Remember,
+		Title
+	} = Styled;
 
-	const [login, setLogin] = useState('');
-	const [password, setPassword] = useState('');
-	const [rememberUser, setRememberUser] = useState(false);
-
-	const onLoginChange = (e: React.ChangeEvent<Element>) => {
-		const target = e.target as HTMLTextAreaElement;
-		setLogin(target.value);
-	};
-	const onPasswordChange = (e: React.ChangeEvent<Element>) => {
-		const target = e.target as HTMLTextAreaElement;
-		setPassword(target.value);
-	};
+	const {
+		login,
+		onLoginChange,
+		password,
+		onPasswordChange,
+		rememberUserSelect,
+		setRememberUserSelect
+	} = useLoginData();
 
 	useEffect(() => {
-		rememberUser ? User.remember = true : User.remember = false;
-	}, [rememberUser]);
+		User.remember = rememberUserSelect;
+	}, [rememberUserSelect]);
 
 
-	const loginHandler = (e: React.MouseEvent) => {
+	const loginHandler = (e: React.MouseEvent | React.KeyboardEvent) => {
 		if (login === '' || password === '') {
 			User.statusMessage = 'Заполните поле ввода';
 			return;
 		}
 		e.preventDefault();
 		User.login(login, password);
-
-		// if (rememberUser) {
-		// 	User.remember = true;
-		// 	User.login(login, password);
-		// }
-		// else {
-		// 	User.remember = false;
-		// 	User.login(login, password);
-		// }
+	};
+	const loginOnEnter = (e: React.KeyboardEvent) => {
+		if (e.key === 'Enter') {
+			loginHandler(e);
+		}
 	};
 
 	useEffect(() => {
@@ -89,13 +55,13 @@ const AuthModalContent: FC<Props> = observer(({ closeModal }) => {
 	}, []);
 
 	useEffect(() => {
-		if (User.currentUser) closeModal && closeModal();
+		if (User.currentUser) closeModal();
 	}, [User.currentUser]);
 
 
 
 	return (
-		<Form>
+		<Form onKeyDown={loginOnEnter}>
 			<Flex gap='24px' direction='column'>
 				<Title>
 					Вход
@@ -113,17 +79,13 @@ const AuthModalContent: FC<Props> = observer(({ closeModal }) => {
 				<Remember gap="8px" align='center' justify='start'>
 					<Checkbox
 						id="remember"
-						onChange={() => setRememberUser(prev => !prev)}
+						onChange={() => setRememberUserSelect(prev => !prev)}
 					/>
 					<label htmlFor="remember">
 						Запомнить
 					</label>
 				</Remember>
 			</Flex>
-
-
-
-
 			<div>
 				{User.loading && 'Loading...'}
 			</div>
@@ -137,10 +99,6 @@ const AuthModalContent: FC<Props> = observer(({ closeModal }) => {
 				onClick={loginHandler}
 			>Войти
 			</LoginButton>
-
-
-
-
 		</Form>
 	);
 });

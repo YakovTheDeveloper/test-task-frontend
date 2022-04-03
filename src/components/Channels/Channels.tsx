@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
-import Flex from '../common/Flex/Flex';
-import * as palette from '../../Colors';
-import { database } from '../../mockDatabase';
 import ChannelItem from './ChannelItem/ChannelItem';
+import channels from '../../store/Channels';
+import FetchError from '../common/Error/FetchError';
+import SkeletonContainer from '../common/SkeletonContainer/SkeletonContainer';
 
 const Container = styled.div`
+	margin-top: -5px;
 	gap: 16px;
 	margin-bottom: 72px;
 	display: flex;
@@ -14,18 +16,18 @@ const Container = styled.div`
 	font-weight: 400;
 `;
 
-const Channels = () => {
-
-	type ActiveStatus = { isActive: boolean }
-	const linkStyle = (linkProps: ActiveStatus) => ({
-		paddingBottom: '8px',
-		color: linkProps.isActive ? palette.red : palette.gray1,
-		borderBottom: linkProps.isActive ? `2px solid ${palette.red}` : 'none'
-	});
-
+const Channels = observer(() => {
 	return (
 		<Container>
-			{database.channels.map(channel =>
+			<SkeletonContainer content={!!channels.content}>
+				<FetchError
+					doesErrorOccur={channels.error.status}
+					errorMessage={channels.error.message}
+					onClickReload={() => channels.getChannels()}
+				/>
+			</SkeletonContainer>
+			
+			{channels.content?.map(channel =>
 				<ChannelItem
 					logoUrl={channel.img}
 					programList={channel.program}
@@ -35,6 +37,6 @@ const Channels = () => {
 			)}
 		</Container >
 	);
-};
+});
 
 export default Channels;

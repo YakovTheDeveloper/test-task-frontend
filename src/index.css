@@ -29,12 +29,21 @@ a {
 
 
 /* Scrollbar Container */
-
+.simplebar-track{
+	overflow: visible !important;
+}
+.simplebar-scrollbar::before {
+	left: 21px !important;
+  }
 .simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
-	width: 9px;
-	height: 696px;
-	background-color: #BDBDBD;
+	width: 4px;
+	/* height: 500px; */
+	background-color: #BDBDBD !important;
 	border-radius: 2px;
 	opacity: 1;
+	right: -10px !important;
 }
+
+
+
 

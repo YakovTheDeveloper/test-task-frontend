@@ -1,27 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import NewMovies from './NewMovies/NewMovies';
 import Genres from './Genres/Genres';
+import NewFilms from './SpecificCategoryContent/NewFilms/NewFilms';
 
-const Films = () => {
-
-	const Container = styled.div`
-		gap: 20px;
-		margin-bottom: 72px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: space-between;
-		flex-wrap: wrap;
+const Container = styled.div`
+	margin-bottom: 72px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
 `;
-
-
+const Films = () => {
 	return (
 		<Container>
-			<NewMovies />
+			<NewFilms />
 			<Genres />
 		</Container>
-
 	);
 };
 

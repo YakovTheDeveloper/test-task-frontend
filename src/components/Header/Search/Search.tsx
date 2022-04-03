@@ -5,13 +5,12 @@ import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
 
 const Container = styled.div`
-	/* max-width: 402px; */
+	margin-top: 11px;
 	width: 402px;
 	column-gap: 32px;
 	row-gap: 12px;
-	height: 25px;
 	display: flex;
-	align-items: center;
+	align-items: start;
 	justify-content: space-between;
 
 	@media (max-width: 992px){
@@ -23,9 +22,8 @@ const Container = styled.div`
 			grid-area: 3 / 1 / 3 / 2;
 			max-width: 300px;
 			flex-direction: column;
+			align-items: center;
 			margin-bottom: 15px;
-			
-			/* align-items: center; */
 	};
 `;
 

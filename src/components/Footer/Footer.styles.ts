@@ -13,6 +13,7 @@ const Inner = styled.div`
 	column-gap: 40px;
 	position: relative;
 	display: flex;
+	align-items: center;
 	flex-wrap: wrap;
 	background: ${palette.gray6};
 	font-weight: 400;
@@ -38,9 +39,12 @@ const Information = styled.p`
 	};
 `;
 
+const Logo = styled.img``;
+
 export const Styled = {
 	Container,
 	Inner,
 	WebsiteLink,
 	Information,
+	Logo
 };

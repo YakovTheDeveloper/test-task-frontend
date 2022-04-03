@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import MovieItemImage from './Image/MovieItemImage';
-import * as palette from '../../../Colors';
+import FilmItemImage from './Image/FilmItemImage';
+import * as palette from '../../../../Colors';
 
 type Props = {
 	title: string
@@ -9,12 +9,7 @@ type Props = {
 	text: string
 }
 
-const MovieItem: FC<Props> = ({
-	title = 'New film',
-	imageUrl = '',
-	text = 'There should be the information about the film'
-
-}) => {
+const FilmItem: FC<Props> = ({ title, imageUrl, text }) => {
 	const Container = styled.div`
 		width: 280px;
 		height: 434px;
@@ -22,20 +17,20 @@ const MovieItem: FC<Props> = ({
 		display: flex;
 		flex-direction: column;
 	`;
-	const Text = styled.p`
+	const Title = styled.h4`
 		font-size: 20px;
 		font-weight: 400;
 		color: ${palette.gray1};
 	`;
-	
+
 	return (
 		<Container>
-			<MovieItemImage imageUrl={imageUrl} text={text} />
-			<Text>
+			<FilmItemImage imageUrl={imageUrl} text={text} />
+			<Title>
 				{title}
-			</Text>
+			</Title>
 		</Container>
 	);
 };
 
-export default MovieItem;
+export default FilmItem;

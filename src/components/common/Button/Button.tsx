@@ -34,14 +34,14 @@ const StyledButton = styled.button<Props>`
 	text-align: center;
 	align-self:${({ alignSelf }) => alignSelf || 'auto '};
 	justify-self:${({ justifySelf }) => justifySelf || 'auto '};
-	width:${({ width }) => width || 'fit-content'};
 	font-size: 16px;
-  	font-weight: 500;
+	font-weight: 500;
 	line-height: 19px;
 	${({ variant }) => {
 		if (variant === 'text') return textStyle;
 		if (variant === 'contained') return containedStyle;
 	}}			
+	width:${({ width }) => width || 'fit-content'};
 `;
 
 const Button: FC<Props> = (props) => {

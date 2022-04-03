@@ -6,14 +6,18 @@ const {
 	Container,
 	Information,
 	Inner,
-	WebsiteLink } = Styled;
+	WebsiteLink,
+	Logo } = Styled;
 
-// refactor img
 const Footer = () => {
 	return (
 		<Container>
 			<Inner>
-				<img src="/assets/images/logotypes/htc-cs-logo.png" alt="" width='32' height='64' />
+				<Logo
+					src="/assets/images/logotypes/htc-cs-logo.png"
+					alt="logo"
+					width='32px'
+					height='64px' />
 				<Information>
 					<Text>
 						426057, Россия, Удмуртская Республика, г. Ижевск, ул. Карла Маркса, 246 (ДК «Металлург»)

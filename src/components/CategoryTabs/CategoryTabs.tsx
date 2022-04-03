@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 const Container = styled.div`
 	gap: 24px;
+	max-height: 42px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -18,6 +19,7 @@ const CategoryTabs = () => {
 
 	type ActiveStatus = { isActive: boolean }
 	const linkStyle = (linkProps: ActiveStatus) => ({
+		lineHeight: '33px',
 		paddingBottom: '8px',
 		color: linkProps.isActive ? palette.red : palette.gray1,
 		borderBottom: linkProps.isActive ? `2px solid ${palette.red}` : 'none'

@@ -5,6 +5,7 @@ import { UserWithoutCredentials } from '../core/models/user';
 import { deleleTokenFromLocalStorage } from '../helpers/localStorage/deleleTokenFromLocalStorage';
 import { setStringifiedTokenToLocalStorage } from '../helpers/localStorage/setStringifiedTokenToLocalStorage';
 import { getUserInfoFromToken } from '../core/auth/getUserInfoFromToken';
+import { ValidationResult } from '../core/auth/validateLoginDataAndGetUser';
 
 
 class User {
@@ -17,72 +18,70 @@ class User {
 
 	constructor() {
 		makeAutoObservable(this);
-
-		autorun(() => {
-			if (!this.currentUser)
-				this.currentUser = getUserInfoFromToken() || null;
-		});
+		autorun(() => this.getUserFromLocalStorage());
 	}
-
-	// get autoClearStatusMessage() {
-	// 	return this.statusMessage = '';
-	// 	return;
-	// }
 
 	async login(username: string, password: string) {
-		this.statusMessage = '';
 		this.loading = true;
-		const validationResult = await validateLoginDataAndGetUser(username, password);
-		if (validationResult.success) {
-			this.statusMessage = validationResult.message;
-			this.currentUser = validationResult.user;
-
-			if (this.remember) {
-				validationResult.user &&
-					setStringifiedTokenToLocalStorage(validationResult.user);
-			}
-			// return;
+		this.statusMessage = '';
+		try {
+			const validationResult = await validateLoginDataAndGetUser(username, password);
+			if (validationResult instanceof Error) throw validationResult;
+			else this.onSuccessfulValidation(validationResult);
 		}
-		this.loading = false;
-		this.statusMessage = validationResult.message;
-		// this.loading = false
+		catch (error: any) {
+			this.statusMessage = error.message;
+		}
+		finally {
+			this.loading = false;
+		}
 	}
 
-
 	logout = () => {
-		// this.isAuthorized = false
 		this.currentUser = null;
 		this.statusMessage = '';
 		deleleTokenFromLocalStorage();
 	};
 
 	changeName = async (firstName: string, lastName: string) => {
-		if (!this.currentUser) return;
-
 		this.loading = true;
 		this.changeNameErrorMessage = '';
-
 		try {
-			const responseWithUpdatedUser = await changeFirstLastName(this.currentUser, firstName, lastName);
-			if (responseWithUpdatedUser instanceof Error) return;
-
-			this.currentUser.firstName = firstName;
-			this.currentUser.lastName = lastName;
-			setStringifiedTokenToLocalStorage(responseWithUpdatedUser);
+			await this.changeNameOrThrowError(firstName, lastName);
 		}
-		catch (error) {
-			this.changeNameErrorMessage = 'Server problems, please try again later';
-			console.log(error);
+		catch (error: any) {
+			console.log('Error with name changing', error);
+			this.changeNameErrorMessage = error.message;
+			// this.changeNameErrorMessage = 'Server problems, please try again later';
 		}
 		finally {
 			this.loading = false;
 		}
 	};
 
-	// getUserFromTokenIfTokenExist = () => {
+	onSuccessfulValidation(validationData: ValidationResult) {
+		this.statusMessage = validationData.message;
+		this.currentUser = validationData.user;
+		if (this.remember) {
+			validationData.user &&
+				setStringifiedTokenToLocalStorage(validationData.user);
+		}
+	}
+	getUserFromLocalStorage() {
+		if (!this.currentUser)
+			this.currentUser = getUserInfoFromToken() || null;
+	}
 
-	// }
+	async changeNameOrThrowError(firstName: string, lastName: string) {
+		if (!this.currentUser) return;
+		const responseWithUpdatedUser = await changeFirstLastName(this.currentUser, firstName, lastName);
+		if (responseWithUpdatedUser instanceof Error) throw responseWithUpdatedUser;
+		else {
+			this.currentUser.firstName = firstName;
+			this.currentUser.lastName = lastName;
+			setStringifiedTokenToLocalStorage(responseWithUpdatedUser);
+		}
+	}
 }
 
 export default new User();
-// export const user = new User();

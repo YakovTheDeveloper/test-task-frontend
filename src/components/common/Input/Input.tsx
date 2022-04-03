@@ -7,15 +7,17 @@ type Props = {
 	width?: string
 	placeholder?: string
 	onChange?: (e: React.ChangeEvent) => void
+	onKeyDown?: (e: React.KeyboardEvent) => void
 	value?: string
 	id?: string
-	onBlur?: () =>  void
+	onBlur?: () => void
 	type?: HTMLInputTypeAttribute
 }
 
 const StyledInput = styled.input<Props>`
 	width: ${({ width }) => width || '100%'};
 	height: 25px;
+	padding-bottom: 6px;
 	font-family: 'Rubik';
 	font-style: normal;
 	font-weight: 500;

@@ -10,11 +10,15 @@ const Container = styled.ul`
 `;
 
 const ProgramItem = styled.li`
-	gap: 16px;
+	gap: 21px;
 	display: flex;
+	line-height: 19px;
 	&:first-child{
 		color:${palette.red};
 	}
+	@media (max-width: 440px){
+		gap: 8px;
+	};
 `;
 
 const Time = styled.span``;

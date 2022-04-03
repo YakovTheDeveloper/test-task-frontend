@@ -5,7 +5,6 @@ import ContentRow from '../ContentRow/ContentRow';
 import * as palette from '../../../Colors';
 
 const Container = styled.section`
-	margin-bottom: 32px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -37,11 +36,9 @@ const GenreBox = styled.div<GenreBoxType>`
 `;
 
 const GenreEmoji = styled.p`
-	/* position: absolute; */
-	/* top: 50%;
-	left: 50%; */
+	font-size: 48px;
+	line-height: 48px;
 	font-weight: 400;
-	font-size: 40px;
 `;
 const GenreName = styled.h3`
  	font-weight: 400;
