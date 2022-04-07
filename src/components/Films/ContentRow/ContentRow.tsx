@@ -7,7 +7,7 @@ const Row = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	@media (max-width: 992px){
-			justify-content: center;
+		justify-content: space-evenly;
 	};
 	`;
 

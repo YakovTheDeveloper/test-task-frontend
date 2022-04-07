@@ -20,17 +20,24 @@ const Container = styled.div`
 
 	@media (max-width: 440px){
 			grid-area: 3 / 1 / 3 / 2;
-			max-width: 300px;
+			max-width: 200px;
 			flex-direction: column;
 			align-items: center;
 			margin-bottom: 15px;
 	};
 `;
 
+const StyledInput = styled(Input)`
+	width: 320px;
+	@media (max-width: 440px){
+		width: 200px;
+	};
+`;
+
 const Search = () => {
 	return (
 		<Container>
-			<Input placeholder='Поиск...' width='320px'></Input>
+			<StyledInput placeholder='Поиск...' width='320px'></StyledInput>
 			<Button variant='text' width='50px'>
 				Найти
 			</Button>

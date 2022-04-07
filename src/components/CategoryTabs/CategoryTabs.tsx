@@ -13,6 +13,10 @@ const Container = styled.div`
 	margin-bottom: 32px;
 	font-size: 28px;
 	font-weight: 500;
+	@media (max-width: 440px){
+		font-size: 20px;
+		max-height: fit-content;
+	};
 `;
 
 const CategoryTabs = () => {
