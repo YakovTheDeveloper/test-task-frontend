@@ -1,7 +1,5 @@
-import { database } from '../../mockDatabase';
 import { DatabaseUser } from '../models/user';
 import { UserWithoutCredentials } from '../models/user';
-import { fakeDelay } from '../../helpers/fakeDelay';
 import { manageErrors } from '../../helpers/fetch/manageErrors';
 
 
