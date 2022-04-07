@@ -19,7 +19,7 @@ const NewFilms = observer(() => {
 					text={movie.description}
 					key={movie.name}
 				/>
-			)};
+			)}
 		</>
 	);
 	return (
