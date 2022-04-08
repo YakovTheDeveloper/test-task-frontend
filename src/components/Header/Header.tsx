@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Search from './Search/Search';
 import VideoServiceLogo from '../Logos/VideoService/VideoServiceLogo';
-import { observer } from 'mobx-react-lite';
 import Login from './Login/Login';
 
 const Container = styled.header`
@@ -29,7 +28,7 @@ const Container = styled.header`
 	};
 `;
 
-const Header = observer(() => {
+const Header = () => {
 	return (
 		<Container>
 			<VideoServiceLogo />
@@ -37,9 +36,7 @@ const Header = observer(() => {
 			<Login />
 		</Container>
 	);
-});
-
-//refactor need footer whole width
+};
 
 export default Header;
 

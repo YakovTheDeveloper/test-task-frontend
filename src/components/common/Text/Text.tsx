@@ -5,11 +5,11 @@ import * as palette from '../../../Colors';
 type Props = {
 	children: React.ReactChild
 }
-const Text: FC<Props> = ({ children }) => {
-	const TextContent = styled.footer`
+const TextContent = styled.footer`
 		font-weight: 400;
 		color: ${palette.gray1}
 	`;
+const Text: FC<Props> = ({ children }) => {
 	return (
 		<>
 			<TextContent>

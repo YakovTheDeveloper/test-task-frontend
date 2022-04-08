@@ -30,7 +30,6 @@ const Footer = () => {
 					</WebsiteLink>
 				</Information>
 			</Inner>
-			{/* <BackgroundAllPageWidth/> */}
 		</Container>
 
 
