@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import * as palette from '../../../Colors';
 import Button from '../../common/Button/Button';
 import Input from '../../common/Input/Input';
 

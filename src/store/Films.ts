@@ -3,7 +3,6 @@ import { FilmType } from '../core/models/films';
 import { fetchFilms } from '../core/films/fetchFilms';
 
 class Films {
-
 	content: FilmType[] | null = null;
 	errorMessage = '';
 	error = {
@@ -29,13 +28,11 @@ class Films {
 		}
 		catch (error: any) {
 			if (error instanceof Error)
-				// this.errorMessage = error.message;
 				this.setError(true, error.message || 'Connection problems');
 		}
 		finally {
 			this.loading = false;
 		}
-
 	};
 
 	setError = (status: boolean, message: string) =>
